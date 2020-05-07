@@ -1,13 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="32c5d862-d78e-4fe5-91f5-51f6c644c8b1" name="Default Changelist" comment="" />
+    <list default="true" id="32c5d862-d78e-4fe5-91f5-51f6c644c8b1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cosc343game/myAgent.py" beforeDir="false" afterPath="$PROJECT_DIR$/cosc343game/myAgent.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1bDQXWutfpfjeZDO4QsT8WMOUjR" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -86,7 +107,11 @@
       <option name="presentableId" value="Default" />
       <updated>1588164223948</updated>
       <workItem from="1588164225739" duration="623000" />
-      <workItem from="1588733805516" duration="22634000" />
+      <workItem from="1588733805516" duration="22833000" />
+      <workItem from="1588809178988" duration="5318000" />
+      <workItem from="1588818414887" duration="3258000" />
+      <workItem from="1588847403181" duration="3839000" />
+      <workItem from="1588853169414" duration="915000" />
     </task>
     <servers />
   </component>
@@ -94,49 +119,49 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1398" height="204" key="GridCell.Tab.0.bottom" timestamp="1588768902841">
+    <state width="1398" height="204" key="GridCell.Tab.0.bottom" timestamp="1588854087152">
       <screen x="0" y="23" width="1440" height="799" />
     </state>
     <state width="1398" height="204" key="GridCell.Tab.0.bottom/0.23.1440.799/-1920.-461.1920.1057@0.23.1440.799" timestamp="1588164956429" />
-    <state width="1398" height="204" key="GridCell.Tab.0.bottom/0.23.1440.799@0.23.1440.799" timestamp="1588768902841" />
-    <state width="1398" height="204" key="GridCell.Tab.0.center" timestamp="1588768902841">
+    <state width="1398" height="204" key="GridCell.Tab.0.bottom/0.23.1440.799@0.23.1440.799" timestamp="1588854087152" />
+    <state width="1398" height="204" key="GridCell.Tab.0.center" timestamp="1588854087151">
       <screen x="0" y="23" width="1440" height="799" />
     </state>
     <state width="1398" height="204" key="GridCell.Tab.0.center/0.23.1440.799/-1920.-461.1920.1057@0.23.1440.799" timestamp="1588164956428" />
-    <state width="1398" height="204" key="GridCell.Tab.0.center/0.23.1440.799@0.23.1440.799" timestamp="1588768902841" />
-    <state width="1398" height="204" key="GridCell.Tab.0.left" timestamp="1588768902841">
+    <state width="1398" height="204" key="GridCell.Tab.0.center/0.23.1440.799@0.23.1440.799" timestamp="1588854087151" />
+    <state width="1398" height="204" key="GridCell.Tab.0.left" timestamp="1588854087146">
       <screen x="0" y="23" width="1440" height="799" />
     </state>
     <state width="1398" height="204" key="GridCell.Tab.0.left/0.23.1440.799/-1920.-461.1920.1057@0.23.1440.799" timestamp="1588164956428" />
-    <state width="1398" height="204" key="GridCell.Tab.0.left/0.23.1440.799@0.23.1440.799" timestamp="1588768902841" />
-    <state width="1398" height="204" key="GridCell.Tab.0.right" timestamp="1588768902841">
+    <state width="1398" height="204" key="GridCell.Tab.0.left/0.23.1440.799@0.23.1440.799" timestamp="1588854087146" />
+    <state width="1398" height="204" key="GridCell.Tab.0.right" timestamp="1588854087151">
       <screen x="0" y="23" width="1440" height="799" />
     </state>
     <state width="1398" height="204" key="GridCell.Tab.0.right/0.23.1440.799/-1920.-461.1920.1057@0.23.1440.799" timestamp="1588164956429" />
-    <state width="1398" height="204" key="GridCell.Tab.0.right/0.23.1440.799@0.23.1440.799" timestamp="1588768902841" />
-    <state width="1398" height="254" key="GridCell.Tab.1.bottom" timestamp="1588756862627">
+    <state width="1398" height="204" key="GridCell.Tab.0.right/0.23.1440.799@0.23.1440.799" timestamp="1588854087151" />
+    <state width="1398" height="254" key="GridCell.Tab.1.bottom" timestamp="1588770883599">
       <screen x="0" y="23" width="1440" height="799" />
     </state>
-    <state width="1398" height="254" key="GridCell.Tab.1.bottom/0.23.1440.799@0.23.1440.799" timestamp="1588756862627" />
-    <state width="1398" height="254" key="GridCell.Tab.1.center" timestamp="1588756862626">
+    <state width="1398" height="254" key="GridCell.Tab.1.bottom/0.23.1440.799@0.23.1440.799" timestamp="1588770883599" />
+    <state width="1398" height="254" key="GridCell.Tab.1.center" timestamp="1588770883599">
       <screen x="0" y="23" width="1440" height="799" />
     </state>
-    <state width="1398" height="254" key="GridCell.Tab.1.center/0.23.1440.799@0.23.1440.799" timestamp="1588756862626" />
-    <state width="1398" height="254" key="GridCell.Tab.1.left" timestamp="1588756862626">
+    <state width="1398" height="254" key="GridCell.Tab.1.center/0.23.1440.799@0.23.1440.799" timestamp="1588770883599" />
+    <state width="1398" height="254" key="GridCell.Tab.1.left" timestamp="1588770883599">
       <screen x="0" y="23" width="1440" height="799" />
     </state>
-    <state width="1398" height="254" key="GridCell.Tab.1.left/0.23.1440.799@0.23.1440.799" timestamp="1588756862626" />
-    <state width="1398" height="254" key="GridCell.Tab.1.right" timestamp="1588756862627">
+    <state width="1398" height="254" key="GridCell.Tab.1.left/0.23.1440.799@0.23.1440.799" timestamp="1588770883599" />
+    <state width="1398" height="254" key="GridCell.Tab.1.right" timestamp="1588770883599">
       <screen x="0" y="23" width="1440" height="799" />
     </state>
-    <state width="1398" height="254" key="GridCell.Tab.1.right/0.23.1440.799@0.23.1440.799" timestamp="1588756862627" />
-    <state x="397" y="255" key="com.intellij.ide.util.TipDialog" timestamp="1588733807459">
+    <state width="1398" height="254" key="GridCell.Tab.1.right/0.23.1440.799@0.23.1440.799" timestamp="1588770883599" />
+    <state x="397" y="255" key="com.intellij.ide.util.TipDialog" timestamp="1588853170698">
       <screen x="0" y="23" width="1440" height="799" />
     </state>
-    <state x="397" y="255" key="com.intellij.ide.util.TipDialog/0.23.1440.799@0.23.1440.799" timestamp="1588733807459" />
+    <state x="397" y="255" key="com.intellij.ide.util.TipDialog/0.23.1440.799@0.23.1440.799" timestamp="1588853170698" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/assignment2$myAgent.coverage" NAME="myAgent Coverage Results" MODIFIED="1588768225492" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/cosc343game" />
-    <SUITE FILE_PATH="coverage/assignment2$game.coverage" NAME="game Coverage Results" MODIFIED="1588768902830" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/cosc343game" />
+    <SUITE FILE_PATH="coverage/assignment2$game.coverage" NAME="game Coverage Results" MODIFIED="1588853933516" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/cosc343game" />
   </component>
 </project>

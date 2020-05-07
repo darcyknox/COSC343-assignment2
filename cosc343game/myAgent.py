@@ -1,9 +1,15 @@
 import numpy as np
+import matplotlib.pyplot as plt
 import random
 
 playerName = "myAgent"
 nPercepts = 75  #This is the number of percepts
-nActions = 7    #This is the number of actionss
+nActions = 7    #This is the number of actions
+
+avgFitData = []
+turns = 0
+
+b = 2
 
 # This is the class for your creature/agent
 
@@ -16,7 +22,7 @@ class MyCreature:
         # values
 
         self.fitness = 0
-
+        self.fitnessWeights = np.random.rand(5)
 
         if chromosome is None:
             self.chromosome = np.random.rand(nPercepts, nActions)
@@ -71,14 +77,10 @@ class MyCreature:
         # Percepts matrix is flattened so it can be iterated through more easily
         percepts = percepts.flatten()
 
-        if percepts[37] == 1:
-            actions[5] = 1000
-
         # Agent function mapping percepts to actions (currently action = sum of percepts * weights)
         for x in range(nPercepts):
             for y in range(nActions):
-                if (actions[y] == 0):
-                    actions[y] = actions[y] + (percepts[x] * self.chromosome[x][y])
+                actions[y] = actions[y] + ((percepts[x] * self.chromosome[x][y])) # + b
 
         return actions
 
@@ -95,6 +97,8 @@ def newGeneration(old_population):
 
     # Fitness for all agents
     fitness = np.zeros((N))
+
+
 
     numSurvivors = 0
     totalSize = 0
@@ -117,13 +121,19 @@ def newGeneration(old_population):
         # creature.strawb_eats - how many strawberries the creature ate
         # creature.enemy_eats - how much energy creature gained from eating enemies
 
-        # .
-        # .
+        # . alive * everything
+        # . size/turn
+
+        fitnessValue = (creature.strawb_eats/creature.turn + creature.enemy_eats/creature.turn) * creature.size
+        #fitnessValue = (creature.strawb_eats / creature.turn + creature.enemy_eats / creature.turn) + creature.size**2 + creature.turn**2
+        #fitnessValue = creature.strawb_eats * creature.fitnessWeights[0] + creature.enemy_eats * creature.fitnessWeights[1] + creature.turn * creature.fitnessWeights[2] + creature.size * creature.fitnessWeights[3]
+
+        fitnessValue = pow(fitnessValue, (creature.alive + 1))
 
         # This fitness functions just considers length of survival.  It's probably not a great fitness
         # function - you might want to use information from other stats as well
-        fitness[n] = creature.turn
-        creature.fitness = creature.turn
+        fitness[n] = fitnessValue
+        creature.fitness = fitnessValue
 
     # At this point you should sort the agent according to fitness and create new population
     # SELECTING PARENTS, MIXING CHROMOSOMES, MAKING NEW GENERATION
@@ -131,7 +141,7 @@ def newGeneration(old_population):
     for n in range(N):
 
         # Create new creature
-        new_creature = MyCreature()
+        #new_creature = MyCreature()
 
         # Here you should modify the new_creature's chromosome by selecting two parents (based on their
         # fitness) and crossing their chromosome to overwrite new_creature.chromosome
@@ -144,7 +154,7 @@ def newGeneration(old_population):
         # . Create a new chromosome for the new creature using the parents' 'genes'
 
         # get 10 random creature objects and their fitness from the old population
-        randomSubset = random.sample(old_population, 20)
+        randomSubset = random.sample(old_population, round(len(old_population) * 0.8))
 
         #Print random subset - tournament selection
         '''print("random subset")
@@ -161,16 +171,22 @@ def newGeneration(old_population):
         father = randomSubset[1]
 
         # Initialise chromosome of new_creature
-        new_creature.chromosome = np.ndarray(shape=(nPercepts, nActions))
+        new_chromosome = np.ndarray(shape=(nPercepts, nActions))
+
+        mutationFactor = random.randint(0, 100)
 
         # Mixing chromosomes
         for i in range(nPercepts):
             for j in range(nActions):
-                if i < (nPercepts / 2): #split down the middle - SINGLE POINT CROSSOVER (CAN CHANGE)
-                    new_creature.chromosome[i][j] = mother.chromosome[i][j]
+                if i < round(nPercepts * 0.75):
+                    new_chromosome[i][j] = mother.chromosome[i][j]
                 else:
-                    new_creature.chromosome[i][j] = father.chromosome[i][j]
+                    new_chromosome[i][j] = father.chromosome[i][j]
                     #print("father " + str(i) + " " + str(j))
+                if random.randint(0, 100) < 5: # mutation
+                    new_chromosome[i][j] = random.uniform(0, np.amax(father.chromosome))
+
+        new_creature = MyCreature(new_chromosome)
 
 
         # Add the new agent to the new population
@@ -178,23 +194,13 @@ def newGeneration(old_population):
 
     # At the end you need to compute average fitness and return it along with your new population
     avg_fitness = np.mean(fitness)
+    avgFitData.append(avg_fitness)
+
+    plt.close('all')
+    plt.figure()
+    plt.xlabel('Epochs')
+    plt.ylabel('Average fitness')
+    plt.plot(avgFitData, 'k.')
+    plt.show()
 
     return (new_population, avg_fitness)
-
-'''percy = np.random.rand(nPercepts)
-
-test = MyCreature()
-
-MyCreature.AgentFunction(test, percy)
-
-testPop = list()
-
-for i in range(50):
-    newCreature = MyCreature()
-    testPercepts = np.random.rand(nPercepts)
-    MyCreature.AgentFunction(newCreature, testPercepts)
-    testPop.append(newCreature)
-
-newGeneration(testPop)'''
-
-
