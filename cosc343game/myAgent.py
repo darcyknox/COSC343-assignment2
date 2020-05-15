@@ -6,188 +6,128 @@ playerName = "myAgent"
 nPercepts = 75  #This is the number of percepts
 nActions = 7    #This is the number of actions
 
-avgFitData = []
-turns = 0
-
-b = 2
+avgFitData = [] # for plotting data
 
 # This is the class for your creature/agent
 
 class MyCreature:
 
     def __init__(self, chromosome=None):
-        # chromosome=None
-        # You should initialise self.chromosome member variable here (whatever you choose it
-        # to be - a list/vector/matrix of numbers - and initialise it with some random
-        # values
 
+        # fitness attribute - used for selection
         self.fitness = 0
-        self.fitnessWeights = np.random.rand(5)
 
         if chromosome is None:
             self.chromosome = np.random.rand(nPercepts, nActions)
         else:
             self.chromosome = chromosome
 
-        testPercept = np.zeros(shape=(5, 5, 3))
-
-        testChrome = np.zeros(shape=(nPercepts, nActions))
-
-        #print("flat percept")
-        #print(testPercept.flatten().size)
-
-        #print("flat chrome")
-        #print(testChrome.flatten().size)
-
-        # .
-        # .
-        # .
-
 
     def AgentFunction(self, percepts):
 
+        # initialised with zero values
         actions = np.zeros(nActions)
 
-        # You should implement a model here that translates from 'percepts' to 'actions'
-        # through 'self.chromosome'.
-        #
-        # The 'actions' variable must be returned and it must be a 7-dim numpy vector or a
-        # list with 7 numbers.
-        #
-        # The index of the largest numbers in the 'actions' vector/list is the action taken
-        # with the following interpretation:
-        # 0 - move left
-        # 1 - move up
-        # 2 - move right
-        # 3 - move down
-        # 4 - do nothing
-        # 5 - eat
-        # 6 - move in a random direction
-        #
-        # Different 'percepts' values should lead to different 'actions'.  This way the agent
-        # reacts differently to different situations.
-        #
-        # Different 'self.chromosome' should lead to different 'actions'.  This way different
-        # agents can exhibit different behaviour.
-
-        # .
-        # .
-        # .
-
-        # Percepts matrix is flattened so it can be iterated through more easily
+        # percepts matrix is flattened so it can be iterated through easily
         percepts = percepts.flatten()
 
-        # Agent function mapping percepts to actions (currently action = sum of percepts * weights)
+        # Agent function mapping percepts to actions (action = sum of (percepts * weights))
         for x in range(nPercepts):
             for y in range(nActions):
-                actions[y] = actions[y] + ((percepts[x] * self.chromosome[x][y])) # + b
+                actions[y] = actions[y] + ((percepts[x] * self.chromosome[x][y]))
+
+        # Eats strawberry when the creature is on a strawberry
+        if percepts[37] == 1:
+            actions[5] = actions[5] * 2
 
         return actions
 
 
-
+# Creates a new generation based on the old population - Genetic Algorithm
 def newGeneration(old_population):
 
-    # This function should return a list of 'new_agents' that is of the same length as the
-    # list of 'old_agents'.  That is, if previous game was played with N agents, the next game
-    # should be played with N agents again.
-
-    # This function should also return average fitness of the old_population
     N = len(old_population)
 
     # Fitness for all agents
     fitness = np.zeros((N))
 
-
-
+    # used for survival rate
     numSurvivors = 0
-    totalSize = 0
-    avgSize = 0
 
-    # This loop iterates over your agents in the old population - the purpose of this boiler plate
-    # code is to demonstrate how to fetch information from the old_population in order
-    # to score fitness of each agent
-    # FITNESS FUNCTION
     # Attributes a fitness score for each creature in the population
     for n, creature in enumerate(old_population):
 
-        # creature is an instance of MyCreature that you implemented above, therefore you can access any attributes
-        # (such as `self.chromosome').  Additionally, the objects has attributes provided by the
-        # game engine:
-        #
         # creature.alive - boolean, true if creature is alive at the end of the game
         # creature.turn - turn that the creature lived to (last turn if creature survived the entire game)
         # creature.size - size of the creature
         # creature.strawb_eats - how many strawberries the creature ate
         # creature.enemy_eats - how much energy creature gained from eating enemies
 
-        # . alive * everything
-        # . size/turn
+        if creature.alive:
+            numSurvivors = numSurvivors + 1
 
-        fitnessValue = (creature.strawb_eats/creature.turn + creature.enemy_eats/creature.turn) * creature.size
-        #fitnessValue = (creature.strawb_eats / creature.turn + creature.enemy_eats / creature.turn) + creature.size**2 + creature.turn**2
-        #fitnessValue = creature.strawb_eats * creature.fitnessWeights[0] + creature.enemy_eats * creature.fitnessWeights[1] + creature.turn * creature.fitnessWeights[2] + creature.size * creature.fitnessWeights[3]
+        survivalRate = numSurvivors/(n + 1)
 
-        fitnessValue = pow(fitnessValue, (creature.alive + 1))
+        # FITNESS FUNCTION
+        fitnessValue = (creature.alive * creature.turn * creature.enemy_eats) + (creature.alive * creature.turn * creature.strawb_eats) + creature.turn
+        fitnessValue = fitnessValue + survivalRate # separated for readability
 
-        # This fitness functions just considers length of survival.  It's probably not a great fitness
-        # function - you might want to use information from other stats as well
+        # Add the fitness to the population fitness list.
         fitness[n] = fitnessValue
+
+        # Give the fitness attribute of the individual creature its fitness value.
+        # This is used for sorting after selection.
         creature.fitness = fitnessValue
 
-    # At this point you should sort the agent according to fitness and create new population
     # SELECTING PARENTS, MIXING CHROMOSOMES, MAKING NEW GENERATION
     new_population = list()
     for n in range(N):
 
-        # Create new creature
-        #new_creature = MyCreature()
-
-        # Here you should modify the new_creature's chromosome by selecting two parents (based on their
-        # fitness) and crossing their chromosome to overwrite new_creature.chromosome
-
-        # Consider implementing elitism, mutation and various other
-        # strategies for producing new creature.
-
-        # . Tournament selection - pick 10 random creatures
-        # . Pick the best 2 from that selection
+        # . Tournament selection - select a subset of 70% of the old population.
+        # . Pick the fittest 2 individuals from that subset.
         # . Create a new chromosome for the new creature using the parents' 'genes'
 
-        # get 10 random creature objects and their fitness from the old population
-        randomSubset = random.sample(old_population, round(len(old_population) * 0.8))
+        # proportion size of old population that the subset will be comprised of
+        subsetProportion = 0.70
 
-        #Print random subset - tournament selection
-        '''print("random subset")
-        print(randomSubset)'''
+        # get random creature objects and their fitness from a proportion of the old population
+        randomSubset = random.sample(old_population, round(len(old_population) * subsetProportion))
 
+        # sort the subset by individual fitness value (fittest at the front of the list)
         randomSubset.sort(key= lambda x:x.fitness, reverse=True)
 
-
-        # Print fitnesses in order
-        '''for i in range(len(randomSubset)):
-            print(randomSubset[i].fitness)'''
-
+        # Chosen parents are the two fittest in the subset
         mother = randomSubset[0]
         father = randomSubset[1]
 
         # Initialise chromosome of new_creature
         new_chromosome = np.ndarray(shape=(nPercepts, nActions))
 
-        mutationFactor = random.randint(0, 100)
+        # Select a single point crossover point
+        crossoverPoint = random.randint(1, nPercepts * nActions)
 
-        # Mixing chromosomes
-        for i in range(nPercepts):
-            for j in range(nActions):
-                if i < round(nPercepts * 0.75):
-                    new_chromosome[i][j] = mother.chromosome[i][j]
-                else:
-                    new_chromosome[i][j] = father.chromosome[i][j]
-                    #print("father " + str(i) + " " + str(j))
-                if random.randint(0, 100) < 5: # mutation
-                    new_chromosome[i][j] = random.uniform(0, np.amax(father.chromosome))
+        # Current point in new chromosome
+        c = 0
 
-        new_creature = MyCreature(new_chromosome)
+        # Elitism -
+        # First 3 creatures in the new population will be clones of the fittest individual in the subset
+        if n < 3:
+            new_creature = MyCreature(mother.chromosome) # copies the genes of the 3 fittest creatures
+        else:
+            # Mixing chromosomes
+            for i in range(nPercepts):
+                for j in range(nActions):
+                    if c < crossoverPoint:
+                        new_chromosome[i][j] = mother.chromosome[i][j]
+                    else:
+                        new_chromosome[i][j] = father.chromosome[i][j]
+                    # Mutation
+                    if random.randint(0, 100) < 3:
+                        new_chromosome[i][j] = random.uniform(0, np.amax(father.chromosome))
+                    c = c + 1
 
+            # Create a new creature with the new_chromosome
+            new_creature = MyCreature(new_chromosome)
 
         # Add the new agent to the new population
         new_population.append(new_creature)
@@ -196,6 +136,7 @@ def newGeneration(old_population):
     avg_fitness = np.mean(fitness)
     avgFitData.append(avg_fitness)
 
+    # Plotting fitness data
     plt.close('all')
     plt.figure()
     plt.xlabel('Epochs')
